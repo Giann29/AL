@@ -1,0 +1,57 @@
+@page "/inscripciones/{IdC:int?}"
+@inject NavigationManager Navegador
+@inject IJSRuntime JsRuntime
+@inject ListarInscripcionesUseCase ListarInscripcionesUseCase
+@inject ListarEstudiantesUseCase ListarEstudiantesUseCase
+@inject GetEstudianteUseCase GetEstudianteUseCase
+@inject EliminarEstudianteUseCase EliminarEstudianteUseCase
+
+<PageTitle>Inscripción</PageTitle>
+<h1><strong>Listado de Estudiantes para inscribir</strong></h1>
+
+<p>Muestra un listado de los <strong>todos</strong> los estudiantes para inscribir.</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th><strong>ID</strong></th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>DNI</th>
+            <th>eMail</th>
+            <th>Inscribir</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var e in _lista)
+        {
+            <tr>
+                <td>@e.Id</td>
+                <td>@e.Nombre</td>
+                <td>@e.Apellido</td>
+                <td>@e.DNI</td>
+                <td>@e.Email</td>
+                <td><button class="botonlindo" @onclick="()=>AñadirEstudiante(e.Id)">
+                        <i class="oi oi-plus"></i>
+                    </button></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<button class="btn btn-outline-danger" @onclick="()=>Volver()">Cancelar</button>
+@code {
+    List<Inscripcion> _listaI = new List<Inscripcion>();
+    List<Estudiante> _lista = new List<Estudiante>();
+    [Parameter] public int? IdC { get; set; }
+    protected override void OnInitialized()
+    {
+        _lista = ListarEstudiantesUseCase.Ejecutar();
+    }
+    void AñadirEstudiante(int IdE)
+    {
+        Navegador.NavigateTo($"/inscribir/{IdC}/{IdE}");
+    }
+    void Volver()
+    {
+        Navegador.NavigateTo("/cursos");
+    }
+}

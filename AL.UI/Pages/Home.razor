@@ -1,0 +1,26 @@
+﻿@page "/"
+@inject NavigationManager Navegador
+<PageTitle>Home</PageTitle>
+<h1><strong>Bienvenido!</strong></h1>
+<br>
+<hr>
+<br>
+<h3><strong></strong></h3>
+<button class="btn btn-primary" @onclick="()=>ListadoCursos()">
+    <i class="oi oi-list-rich"></i> CURSOS
+</button>
+<br>
+<button class="btn btn-primary" @onclick="()=>ListadoAlumnos()">
+    <i class="oi oi-list-rich"></i> ESTUDIANTES
+</button>
+
+@code {
+    void ListadoCursos()
+    {
+        Navegador.NavigateTo("cursos");
+    }
+    void ListadoAlumnos()
+    {
+        Navegador.NavigateTo("estudiantes");
+    }
+}

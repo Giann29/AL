@@ -1,0 +1,23 @@
+.botonlindo[b-mmgqnimldv] {
+    background-color: rgb(18, 170, 61);
+    color: white;
+    border: none;
+    height: 35px;
+    width: 75px;
+    font-weight: bold;
+    font-size: 15px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.botonmalo[b-mmgqnimldv] {
+    background-color: rgb(170, 18, 18);
+    color: white;
+    border: none;
+    height: 35px;
+    width: 100px;
+    font-weight: bold;
+    font-size: 15px;
+    border-radius: 6px;
+    cursor: pointer;
+}

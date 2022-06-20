@@ -1,0 +1,88 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = AL.UI
+build_property.RootNamespace = AL.UI
+build_property.ProjectDir = C:\Users\giann\Downloads\Trabajo .NET - copia\AL\AL.UI\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\giann\Downloads\Trabajo .NET - copia\AL\AL.UI
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/giann/Downloads/Trabajo .NET - copia/AL/AL.UI/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/giann/Downloads/Trabajo .NET - copia/AL/AL.UI/Pages/Inscribir.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5zY3JpYmlyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/giann/Downloads/Trabajo .NET - copia/AL/AL.UI/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/giann/Downloads/Trabajo .NET - copia/AL/AL.UI/Pages/AgregarModificarCurso.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWdyZWdhck1vZGlmaWNhckN1cnNvLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-j8nfqjf62o
+
+[C:/Users/giann/Downloads/Trabajo .NET - copia/AL/AL.UI/Pages/AgregarModificarEstudiante.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWdyZWdhck1vZGlmaWNhckVzdHVkaWFudGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-mc80d2oymq
+
+[C:/Users/giann/Downloads/Trabajo .NET - copia/AL/AL.UI/Pages/Cursos.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ3Vyc29zLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-143tie19sv
+
+[C:/Users/giann/Downloads/Trabajo .NET - copia/AL/AL.UI/Pages/Estudiantes.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXN0dWRpYW50ZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-mx3ojn2e22
+
+[C:/Users/giann/Downloads/Trabajo .NET - copia/AL/AL.UI/Pages/Home.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-nci2p7a7ui
+
+[C:/Users/giann/Downloads/Trabajo .NET - copia/AL/AL.UI/Pages/Inscripciones.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5zY3JpcGNpb25lcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-z2q7vqu8wy
+
+[C:/Users/giann/Downloads/Trabajo .NET - copia/AL/AL.UI/Pages/ListadoAlumnosInscriptos.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGlzdGFkb0FsdW1ub3NJbnNjcmlwdG9zLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-degvmm2va5
+
+[C:/Users/giann/Downloads/Trabajo .NET - copia/AL/AL.UI/Pages/ListadoEnCurso.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGlzdGFkb0VuQ3Vyc28ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-mmgqnimldv
+
+[C:/Users/giann/Downloads/Trabajo .NET - copia/AL/AL.UI/Pages/ListadoFinalizado.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGlzdGFkb0ZpbmFsaXphZG8ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-ickkaukznc
+
+[C:/Users/giann/Downloads/Trabajo .NET - copia/AL/AL.UI/Pages/ListarCursosInscriptos.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGlzdGFyQ3Vyc29zSW5zY3JpcHRvcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-47xmzpkvsk
+
+[C:/Users/giann/Downloads/Trabajo .NET - copia/AL/AL.UI/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-p15pbsciya
+
+[C:/Users/giann/Downloads/Trabajo .NET - copia/AL/AL.UI/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-1o6ufadtpc
+
+[C:/Users/giann/Downloads/Trabajo .NET - copia/AL/AL.UI/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/giann/Downloads/Trabajo .NET - copia/AL/AL.UI/Pages/_Host.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/giann/Downloads/Trabajo .NET - copia/AL/AL.UI/Pages/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0xheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 

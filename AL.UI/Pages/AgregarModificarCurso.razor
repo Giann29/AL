@@ -1,0 +1,97 @@
+@page "/nuevo-curso/{Id:int?}"
+@inject IJSRuntime JsRuntime
+@inject EliminarCursoUseCase EliminarCursoUseCase
+@inject NavigationManager Navegador;
+@inject AgregarCursoUseCase AgregarCursoUseCase
+@inject GetCursoUseCase GetCursoUseCase
+@inject ModificarCursoUseCase ModificarCursoUseCase
+@if (_esNuevoCurso)
+{
+    <PageTitle>Agregando Curso</PageTitle>
+    <h1>Ingrese los datos del nuevo curso</h1>
+    <hr>
+    <hr>
+    <br>
+    <h4>Ingrese el titulo del curso:</h4>
+    <input type="text" placeholder="Titulo" @bind="_curso.Titulo" required>
+    <br>
+    <h4>Ingrese una descripción corta del mismo:</h4>
+    <input type="text" placeholder="Descripcion" @bind="_curso.Descripcion" required>
+    <br>
+    <h4>Fecha Inicio:</h4>
+    <input type="date" min="2018-01-01" max="2025-12-31" @bind="_curso.FechaInicio">
+    <br>
+    <h4>Fecha Finalización:</h4>
+    <input type="date" min="2018-01-01" max="2025-12-31" @bind="_curso.FechaFinalizacion">
+    <br>
+    <br>
+    <button class="botonlindo" @onclick="()=>Aceptar()">Aceptar</button>
+    <button class="btn btn-outline-danger" @onclick="()=>Volver()">Cancelar</button>
+}
+else
+{
+    <PageTitle>Modificando Curso</PageTitle>
+    <h1>Ingrese los nuevos datos del curso "@_curso.Titulo"</h1>
+    <hr>
+    <hr>
+    <br>
+    <h4>Ingrese el titulo del curso:</h4>
+    <input type="text" placeholder="Titulo" @bind="_curso.Titulo" required>
+    <br>
+    <h4>Ingrese una descripción corta del mismo:</h4>
+    <input type="text" placeholder="Descripcion" @bind="_curso.Descripcion" required>
+    <br>
+    <h4>Fecha Inicio:</h4>
+    <input type="date" min="2018-01-01" max="2025-12-31" @bind="_curso.FechaInicio">
+    <br>
+    <h4>Fecha Finalización:</h4>
+    <input type="date" min="2018-01-01" max="2025-12-31" @bind="_curso.FechaFinalizacion">
+    <br>
+    <br>
+    <button class="botonlindo" @onclick="()=>Aceptar()">Aceptar</button>
+    <button class="btn btn-outline-danger" @onclick="()=>Volver()">Cancelar</button>
+    <button class="botonmalo" @onclick="()=>Eliminar()">Eliminar</button>
+}
+@code {
+    Curso _curso = new Curso();
+    [Parameter] public int? Id { get; set; }
+    bool _esNuevoCurso = true;
+    async Task Eliminar()
+    {
+        bool confirmado = await JsRuntime.InvokeAsync<bool>("confirm", $"Desea eliminar a el curso?");
+        if (confirmado && Id != null)
+        {
+            EliminarCursoUseCase.Ejecutar(Id.Value);
+            Navegador.NavigateTo("cursos");
+        }
+    }
+    protected override void OnParametersSet()
+    {
+        if (Id != null)
+        {
+            var curso_hallado = GetCursoUseCase.Ejecutar(Id.Value);
+            if (curso_hallado != null)
+            {
+                _curso = curso_hallado;
+                _esNuevoCurso = false;
+            }
+        }
+    }
+    void Aceptar()
+    {
+        if (_esNuevoCurso)
+        {
+            AgregarCursoUseCase.Ejecutar(_curso);
+        }
+        else
+        {
+            ModificarCursoUseCase.Ejecutar(_curso);
+        }
+        _curso = new Curso();
+        Navegador.NavigateTo("cursos");
+    }
+    void Volver()
+    {
+        Navegador.NavigateTo("/cursos");
+    }
+}

@@ -1,0 +1,84 @@
+@page "/listado-en-curso"
+@inject ListarInscripcionesUseCase ListarInscripcionesUseCase
+@inject ListarEstudiantesUseCase ListarEstudiantesUseCase
+@inject GetEstudianteUseCase GetEstudianteUseCase
+@inject GetCursoUseCase GetCursoUseCase
+@inject EliminarInscripcionUseCase EliminarInscripcionUseCase
+@inject IJSRuntime JsRuntime
+@inject NavigationManager Navegador
+<PageTitle>Alumnos Cursando</PageTitle>
+<h1>Asistencias de cursos actuales</h1>
+<hr>
+<table class="table">
+    <thead>
+        <tr>
+            <th>NOMBRE</th>
+            <th>APELLIDO</th>
+            <th>EMAIL</th>
+            <th>TITULO DEL CURSO</th>
+            <th>FECHA DE COMIENZO</th>
+            <th>FECHA DE FIN</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in _lista)
+        {
+            @if (x != null)
+            {
+                var c = GetCursoUseCase.Ejecutar(x.IdCurso);
+                var e = GetEstudianteUseCase.Ejecutar(x.IdEstudiante);
+                @if (c != null && e != null)
+                {
+                    @if (c.FechaFinalizacion > DateTime.Now)
+                    {
+                        <tr>
+                            <td>@e.Nombre</td>
+                            <td>@e.Apellido</td>
+                            <td>@e.Email</td>
+                            <td>@c.Titulo</td>
+                            <td>@c.FechaInicio.ToShortDateString()</td>
+                            <td>@c.FechaFinalizacion.ToShortDateString()</td>
+                            <button class="botonmalo" @onclick="()=>EliminarInscripcion(x.Id)">Dar de Baja</button>
+                        </tr>
+                    }
+                }
+            }
+        }
+    </tbody>
+</table>
+<button class="btn btn-outline-danger" @onclick="()=>Volver()">Cancelar</button>
+@code {
+    List<Inscripcion> _lista = new List<Inscripcion>();
+    List<Inscripcion> _listaI = new List<Inscripcion>();
+    List<Estudiante> _listaE = new List<Estudiante>();
+    protected override void OnInitialized()
+    {
+        _listaI = ListarInscripcionesUseCase.Ejecutar();
+        _listaE = ListarEstudiantesUseCase.Ejecutar();
+        var query = _listaI.Join(_listaE,
+        i => i.IdEstudiante,
+        e => e.Id,
+        (i, e) => new Inscripcion
+        {
+            Id = i.Id,
+            IdEstudiante = i.IdEstudiante,
+            IdCurso = i.IdCurso
+        });
+        var ordenado = query.OrderBy(x => x.IdEstudiante);
+        _lista = ordenado.ToList();
+    }
+    async Task EliminarInscripcion(int id)
+    {
+        bool confirmado = await JsRuntime.InvokeAsync<bool>("confirm", $"Desea dar de baja esta Inscripcion?");
+        if (confirmado)
+        {
+            EliminarInscripcionUseCase.Ejecutar(id);
+            OnInitialized();
+        }
+
+    }
+    void Volver()
+    {
+        Navegador.NavigateTo("/cursos");
+    }
+}

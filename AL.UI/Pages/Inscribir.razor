@@ -1,0 +1,42 @@
+@page "/inscribir/{IdC:int?}/{IdE:int?}"
+@inject NavigationManager Navegador
+@inject GetCursoUseCase GetCursoUseCase
+@inject GetEstudianteUseCase GetEstudianteUseCase
+@inject EstaInscriptoUseCase EstaInscriptoUseCase
+@inject AgregarInscripcionUseCase AgregarInscripcionUseCase
+@inject IJSRuntime JsRuntime
+@code{
+    [Parameter] public int? IdC { get; set; }
+    [Parameter] public int? IdE { get; set; }
+    protected override void OnParametersSet()
+    {
+        Inscripcion _inscripcion=new Inscripcion();
+        if (IdC != null && IdE != null)
+        {
+            var curso_hallado = GetCursoUseCase.Ejecutar(IdC.Value);
+            var estudiante_hallado = GetEstudianteUseCase.Ejecutar(IdE.Value);
+            if (curso_hallado != null && estudiante_hallado!=null)
+            {
+                _inscripcion.IdCurso=curso_hallado.Id;
+                _inscripcion.IdEstudiante=estudiante_hallado.Id;
+                _inscripcion.Fecha=DateTime.Now;
+                if (!(EstaInscriptoUseCase.Ejecutar(_inscripcion))){
+                    AgregarInscripcionUseCase.Ejecutar(_inscripcion);
+                    Navegador.NavigateTo($"/listadoAlumnosInscriptos/{IdC}");
+                }
+                else{
+                    yaRealizada();
+                }
+            }
+        }
+    }
+    async Task yaRealizada(){
+        bool confirmado =await JsRuntime.InvokeAsync<bool>("confirm",$"Esta inscripcion ya fue realizada, desea inscribir a otra persona?");
+        if (confirmado){
+            Navegador.NavigateTo($"inscripciones/{IdC}");
+        }
+        else{
+            Navegador.NavigateTo($"/");
+        }
+    }
+}

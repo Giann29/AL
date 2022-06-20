@@ -1,0 +1,27 @@
+.btn-primary {
+    margin-bottom: 15px;
+}
+
+.botonlindo {
+    background-color: rgb(18, 170, 61);
+    color: white;
+    border: none;
+    height: 35px;
+    width: 75px;
+    font-weight: bold;
+    font-size: 15px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.botonmalo {
+    background-color: rgb(170, 18, 18);
+    color: white;
+    border: none;
+    height: 35px;
+    width: 75px;
+    font-weight: bold;
+    font-size: 15px;
+    border-radius: 6px;
+    cursor: pointer;
+}

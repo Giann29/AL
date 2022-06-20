@@ -1,0 +1,68 @@
+@page "/listado-finalizado"
+@inject ListarInscripcionesUseCase ListarInscripcionesUseCase
+@inject ListarEstudiantesUseCase ListarEstudiantesUseCase
+@inject GetEstudianteUseCase GetEstudianteUseCase
+@inject GetCursoUseCase GetCursoUseCase
+@inject NavigationManager Navegador
+<PageTitle>Cursos Finalizados</PageTitle>
+<h1>Cursos finalizados</h1>
+<hr>
+<table class="table">
+    <thead>
+        <tr>
+            <th>NOMBRE</th>
+            <th>APELLIDO</th>
+            <th>EMAIL</th>
+            <th>TITULO DEL CURSO</th>
+            <th><strong>FECHA FIN CURSO</strong></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in _lista)
+        {
+            @if (x != null)
+            {
+                var c = GetCursoUseCase.Ejecutar(x.IdCurso);
+                var e = GetEstudianteUseCase.Ejecutar(x.IdEstudiante);
+                @if (c != null && e != null)
+                {
+                    @if (c.FechaFinalizacion < DateTime.Now)
+                    {
+                        <tr>
+                            <td>@e.Nombre</td>
+                            <td>@e.Apellido</td>
+                            <td>@e.Email</td>
+                            <td>@c.Titulo</td>
+                            <td>@c.FechaFinalizacion.ToShortDateString()</td>
+                        </tr>
+                    }
+                }
+            }
+        }
+    </tbody>
+</table>
+<button class="btn btn-outline-danger" @onclick="()=>Volver()">Cancelar</button>
+@code {
+    List<Inscripcion> _lista = new List<Inscripcion>();
+    List<Inscripcion> _listaI = new List<Inscripcion>();
+    List<Estudiante> _listaE = new List<Estudiante>();
+    protected override void OnInitialized()
+    {
+        _listaI = ListarInscripcionesUseCase.Ejecutar();
+        _listaE = ListarEstudiantesUseCase.Ejecutar();
+        var query = _listaI.Join(_listaE,
+        i => i.IdEstudiante,
+        e => e.Id,
+        (i, e) => new Inscripcion
+        {
+            IdEstudiante = i.IdEstudiante,
+            IdCurso = i.IdCurso
+        });
+        var ordenado = query.OrderBy(x => x.IdEstudiante);
+        _lista = ordenado.ToList();
+    }
+    void Volver()
+    {
+        Navegador.NavigateTo("/cursos");
+    }
+}

@@ -1,0 +1,70 @@
+@page "/estudiantes"
+@inject NavigationManager Navegador
+@inject IJSRuntime JsRuntime
+@inject ListarInscripcionesUseCase ListarInscripcionesUseCase
+@inject ListarEstudiantesUseCase ListarEstudiantesUseCase
+@inject GetEstudianteUseCase GetEstudianteUseCase
+@inject EliminarEstudianteUseCase EliminarEstudianteUseCase
+
+<PageTitle>Estudiantes</PageTitle>
+<h1><strong>Listado de Estudiantes</strong></h1>
+
+<p>Muestra un listado de los <strong>todos</strong> los estudiantes.</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th><strong>ID</strong></th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>DNI</th>
+            <th>eMail</th>
+            <th>Modificar Estudiante</th>
+            <th>Cursos</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var e in _lista)
+        {
+            <tr>
+                <td>@e.Id</td>
+                <td>@e.Nombre</td>
+                <td>@e.Apellido</td>
+                <td>@e.DNI</td>
+                <td>@e.Email</td>
+                <td><button class="btn btn-primary" @onclick="()=>ModificarEstudiante(e.Id)">
+                        <i class="oi oi-pencil"></i>
+                    </button></td>
+                <td><button class="btn btn-primary" @onclick="()=>VerCursosEstudiante(e.Id)">
+                        <i class="oi oi-list-rich"></i>
+                    </button></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<td>
+    <button class="btn btn-success" @onclick="()=>AñadirEstudiante()">
+        <i class="oi oi-plus"></i> <strong>Añadir estudiante</strong>
+    </button>
+</td>
+<hr>
+@code {
+    List<Inscripcion> _listaI = new List<Inscripcion>();
+    List<Estudiante> _lista = new List<Estudiante>();
+    [Parameter] public int? Id { get; set; }
+    protected override void OnInitialized()
+    {
+        _lista = ListarEstudiantesUseCase.Ejecutar();
+    }
+    void ModificarEstudiante(int id)
+    {
+        Navegador.NavigateTo($"/nuevo-estudiante/{id}");
+    }
+    void VerCursosEstudiante(int id)
+    {
+        Navegador.NavigateTo($"/listadoCursoInscriptos/{id}");
+    }
+    void AñadirEstudiante()
+    {
+        Navegador.NavigateTo("/nuevo-estudiante");
+    }
+}

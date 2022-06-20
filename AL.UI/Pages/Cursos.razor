@@ -1,0 +1,94 @@
+@page "/cursos"
+@inject IJSRuntime JsRuntime
+@inject NavigationManager Navegador;
+@inject ListarCursosUseCase ListarCursosUseCase
+@inject IJSRuntime JsRuntime;
+@inject EliminarCursoUseCase EliminarCursoUseCase
+
+<PageTitle>Cursos</PageTitle>
+<h1><strong>Listado de Cursos</strong></h1>
+
+<p>Muestra un listado de los <strong>todos</strong> los cursos.</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th><strong>ID</strong></th>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th>Fecha Inicio</th>
+            <th>Fecha Fin</th>
+            <th>Inscribir Alumno</th>
+            <th>Modificar Curso</th>
+            <th>Alumnos</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var c in _lista)
+        {
+            <tr>
+                <td>@c.Id</td>
+                <td>@c.Titulo</td>
+                <td>@c.Descripcion</td>
+                <td>@c.FechaInicio.ToShortDateString()</td>
+                <td>@c.FechaFinalizacion.ToShortDateString()</td>
+                <td><button class="btn btn-primary" @onclick="()=>InscribirEstudiante(c.Id)">
+                        <i class="oi oi-plus"></i>
+                    </button></td>
+                <td><button class="btn btn-primary" @onclick="()=>ModificarCurso(c.Id)">
+                        <i class="oi oi-pencil"></i>
+                    </button></td>
+                <td><button class="btn btn-primary" @onclick="()=>VerEstudiantesCurso(c.Id)">
+                        <i class="oi oi-list-rich"></i>
+                    </button></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<td>
+    <button class="btn btn-success" @onclick="()=>AñadirCurso()">
+        <i class="oi oi-plus"></i> <strong> Añadir curso</strong>
+    </button>
+</td>
+<hr>
+<td>
+    <button class="btn btn-outline-success" @onclick="()=>CursosActuales()">
+        <i class="oi oi-list-rich"></i> <strong>Cursos actuales</strong>
+    </button>
+</td>
+<hr>
+<td>
+    <button class="btn btn-outline-secondary" @onclick="()=>CursosFinalizados()">
+        <i class="oi oi-list-rich"></i> <strong>Cursos Finalizados</strong>
+    </button>
+</td>
+@code {
+    List<Curso> _lista = new List<Curso>();
+    protected override void OnInitialized()
+    {
+        _lista = ListarCursosUseCase.Ejecutar();
+    }
+    void VerEstudiantesCurso(int id)
+    {
+        Navegador.NavigateTo($"/listadoAlumnosInscriptos/{id}");
+    }
+    void InscribirEstudiante(int id)
+    {
+        Navegador.NavigateTo($"/inscripciones/{id}");
+    }
+    void ModificarCurso(int id)
+    {
+        Navegador.NavigateTo($"/nuevo-curso/{id}");
+    }
+    void AñadirCurso()
+    {
+        Navegador.NavigateTo("/nuevo-curso");
+    }
+    void CursosFinalizados()
+    {
+        Navegador.NavigateTo("/listado-finalizado");
+    }
+    void CursosActuales()
+    {
+        Navegador.NavigateTo("/listado-en-curso");
+    }
+}

@@ -1,0 +1,128 @@
+{
+  "format": 1,
+  "restore": {
+    "c:\\Users\\giann\\Downloads\\Trabajo .NET - copia\\AL\\AL.Repositorios\\AL.Repositorios.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\giann\\Downloads\\Trabajo .NET - copia\\AL\\AL.Aplicacion\\AL.Aplicacion.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\giann\\Downloads\\Trabajo .NET - copia\\AL\\AL.Aplicacion\\AL.Aplicacion.csproj",
+        "projectName": "AL.Aplicacion",
+        "projectPath": "C:\\Users\\giann\\Downloads\\Trabajo .NET - copia\\AL\\AL.Aplicacion\\AL.Aplicacion.csproj",
+        "packagesPath": "C:\\Users\\giann\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\giann\\Downloads\\Trabajo .NET - copia\\AL\\AL.Aplicacion\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\giann\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[6.0.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.203\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "c:\\Users\\giann\\Downloads\\Trabajo .NET - copia\\AL\\AL.Repositorios\\AL.Repositorios.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "c:\\Users\\giann\\Downloads\\Trabajo .NET - copia\\AL\\AL.Repositorios\\AL.Repositorios.csproj",
+        "projectName": "AL.Repositorios",
+        "projectPath": "c:\\Users\\giann\\Downloads\\Trabajo .NET - copia\\AL\\AL.Repositorios\\AL.Repositorios.csproj",
+        "packagesPath": "C:\\Users\\giann\\.nuget\\packages\\",
+        "outputPath": "c:\\Users\\giann\\Downloads\\Trabajo .NET - copia\\AL\\AL.Repositorios\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\giann\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\giann\\Downloads\\Trabajo .NET - copia\\AL\\AL.Aplicacion\\AL.Aplicacion.csproj": {
+                "projectPath": "C:\\Users\\giann\\Downloads\\Trabajo .NET - copia\\AL\\AL.Aplicacion\\AL.Aplicacion.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[6.0.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.203\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

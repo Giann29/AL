@@ -1,0 +1,104 @@
+@page "/listadoCursoInscriptos/{Id:int?}"
+@inject NavigationManager Navegador
+@inject ListarInscripcionesUseCase ListarInscripcionesUseCase
+@inject GetCursoUseCase GetCursoUseCase
+@inject GetEstudianteUseCase GetEstudianteUseCase
+@inject IJSRuntime JsRuntime
+@inject EliminarInscripcionUseCase EliminarInscripcionUseCase
+@inject BuscarInscripcionUseCase BuscarInscripcionUseCase
+<PageTitle>Cursos Inscripto</PageTitle>
+@if (e != null)
+{
+    <h1>Cursos del alumno @e.Nombre
+        @e.Apellido:</h1>
+}
+@if (hayElementos)
+{
+    <table class="table" style="width:100%">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>TITULO</th>
+                <th>DESCRIPCION</th>
+                <th>FECHA INICIO</th>
+                <th>FECHA FIN</th>
+                <th>DAR DE BAJA</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var c in _lista)
+            {
+                <tr>
+                    <td>@c.Id</td>
+                    <td>@c.Titulo</td>
+                    <td>@c.Descripcion</td>
+                    <td>@c.FechaInicio.ToShortDateString()</td>
+                    <td>@c.FechaFinalizacion.ToShortDateString()</td>
+                    <button class="botonmalo" @onclick="()=>Eliminar(c.Id)">Eliminar</button>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <button class="btn btn-outline-danger" @onclick="()=>Volver()">
+        Volver
+    </button>
+}
+else
+{
+    <hr>
+    <h3>Lo sentimos pero el alumno no se encuetra inscripto a ningún curso!</h3>
+    <br>
+    <td><button class="btn btn-outline-danger" @onclick="()=>Volver()">
+            Volver
+        </button></td>
+}
+
+
+@code {
+    bool hayElementos;
+    Estudiante? e;
+    List<Inscripcion> _listaI = new List<Inscripcion>();
+    List<Curso> _lista = new List<Curso>();
+    [Parameter] public int? Id { get; set; }
+    protected override void OnInitialized()
+    {
+        _lista = new List<Curso>();
+        _listaI = ListarInscripcionesUseCase.Ejecutar();
+        if (Id != null)
+        {
+            e = GetEstudianteUseCase.Ejecutar(Id.Value);
+            var listado = from i in _listaI
+                          where i.IdEstudiante == Id.Value
+                          select i;
+            foreach (var i in listado)
+            {
+                var x = GetCursoUseCase.Ejecutar(i.IdCurso);
+                if (x != null)
+                {
+                    _lista.Add(x);
+                }
+            }
+        }
+        hayElementos = _lista.Count > 0;
+    }
+    void Volver()
+    {
+        Navegador.NavigateTo("/estudiantes");
+    }
+    async Task Eliminar(int id)
+    {
+        bool confirmado = await JsRuntime.InvokeAsync<bool>("confirm", $"Desea eliminar la Inscripcion?");
+        if (confirmado)
+        {
+            if (Id != null)
+            {
+                var i = BuscarInscripcionUseCase.Ejecutar(Id.Value, id);
+                if (i != null)
+                {
+                    EliminarInscripcionUseCase.Ejecutar(i.Id);
+                    OnInitialized();
+                }
+            }
+        }
+    }
+}

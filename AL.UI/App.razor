@@ -1,0 +1,12 @@
+﻿<Router AppAssembly="@typeof(App).Assembly">
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+        <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+    </Found>
+    <NotFound>
+        <PageTitle>=¡Error!</PageTitle>
+        <LayoutView Layout="@typeof(MainLayout)">
+            <p role="alert"><strong>Disculpe pero no hay nada en esta dirección. Error nuestro!</strong></p>
+        </LayoutView>
+    </NotFound>
+</Router>
